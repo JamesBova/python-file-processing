@@ -1,0 +1,3 @@
+This is my first file-processing example.
+This line was appended.
+Added using r+ mode.

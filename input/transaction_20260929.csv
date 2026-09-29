@@ -1,0 +1,9 @@
+transaction_id,customer_name,amount,status
+1001,Bob Smith,75.50,Approved
+1002,Alice Jones,120.00,Pending
+1003,David Miller,45.25,Declined
+1004,  Maria Garcia  ,850.00,approved
+1005,John Brown,1250.50,APPROVED
+1006,Lisa Wilson,32.75,pending
+1007,Chris Taylor,499.99,Approved
+1008,Sarah Davis,2000.00,Declined

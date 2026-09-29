@@ -1,0 +1,14 @@
+[
+    {
+        "transaction_id": 2001,
+        "customer_name": "James Smith",
+        "amount": 95.5,
+        "status": "Approved"
+    },
+    {
+        "transaction_id": 2002,
+        "customer_name": "Mary Jones",
+        "amount": 140.0,
+        "status": "Pending"
+    }
+]

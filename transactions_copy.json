@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1001,
+        "customer": "Bob Smith",
+        "amount": 75.5
+    },
+    {
+        "id": 1002,
+        "customer": "Alice Jones",
+        "amount": 120.0
+    },
+    {
+        "id": 1003,
+        "customer": "David Miller",
+        "amount": 45.25
+    }
+]

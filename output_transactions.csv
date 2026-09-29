@@ -1,0 +1,4 @@
+transaction_id,customer_name,amount,status
+2001,James Smith,95.5,Approved
+2002,Mary Jones,140.0,Pending
+2003,David Brown,75.25,Declined
