@@ -1,0 +1,25 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.log
+.DS_Store
+Thumbs.db
+# Runtime data can contain private customer information.
+/input/
+/output/
+/error/
+/archive/
+/.test_runs/
+
+.git/
+.github/
