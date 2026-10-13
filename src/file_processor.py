@@ -1,9 +1,9 @@
 """Read CSV batches, route rejected rows, and archive completed sources."""
 
 import csv
-from datetime import datetime
 import logging
 import shutil
+from datetime import datetime
 
 from src.file_validation import REQUIRED_FIELDS, validate_record, validation_filename
 

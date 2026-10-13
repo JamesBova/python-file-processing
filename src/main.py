@@ -5,6 +5,8 @@ from pathlib import Path
 
 from src.file_processor import process_directory
 
+LOGGER = logging.getLogger(__name__)
+
 
 def main():
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -12,7 +14,7 @@ def main():
     try:
         return 1 if process_directory(data_dir) else 0
     except OSError as error:
-        logging.error("Cannot access data directories: %s", error)
+        LOGGER.error("Cannot access data directories: %s", error)
         return 1
 
 

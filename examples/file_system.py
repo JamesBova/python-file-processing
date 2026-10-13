@@ -3,8 +3,6 @@ import glob
 import shutil
 import tempfile
 from pathlib import Path
-import tempfile
-
 
 def demonstrate():
     # ==================================================
