@@ -51,3 +51,26 @@ jobs:
 
           Write-Host "Deployment completed successfully."
           Write-Host "Deployment location: $deployPath"
+  deploy-uat:
+    needs: deploy
+    runs-on: [self-hosted, windows, x64]
+    environment: UAT
+
+    steps:
+      - name: Checkout tested code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Deploy to UAT
+        shell: powershell
+        run: |
+          $deployPath = "C:\deploy\uat\python-data-pipeline"
+
+          New-Item -ItemType Directory -Force -Path $deployPath | Out-Null
+
+          Copy-Item ".\src" "$deployPath\src" -Recurse -Force
+
+          if (Test-Path ".\requirements.txt") {
+              Copy-Item ".\requirements.txt" "$deployPath\requirements.txt" -Force
+          }
