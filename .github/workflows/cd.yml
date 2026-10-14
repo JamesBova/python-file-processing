@@ -1,0 +1,53 @@
+name: Python Data Pipeline CD
+
+on:
+  workflow_run:
+    workflows: ["Python Data Pipeline CI"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      (github.event.workflow_run.head_branch == 'main' ||
+       github.event.workflow_run.head_branch == 'master')
+
+    runs-on: [self-hosted, windows, x64]
+
+    steps:
+      - name: Checkout tested code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Deploy pipeline
+        shell: powershell
+        run: |
+          $deployPath = "C:\deploy\python-data-pipeline"
+          $backupRoot = "C:\deploy\backups"
+
+          $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+          $backupPath = Join-Path $backupRoot "python-data-pipeline-$timestamp"
+
+          # Create required folders
+          New-Item -ItemType Directory -Force -Path $deployPath | Out-Null
+          New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
+
+          # Back up the current deployment if files already exist
+          if ((Get-ChildItem $deployPath -Force | Measure-Object).Count -gt 0) {
+              Copy-Item "$deployPath\*" $backupPath -Recurse -Force
+          }
+
+          # Deploy the new version
+          Copy-Item ".\src" "$deployPath\src" -Recurse -Force
+
+          if (Test-Path ".\requirements.txt") {
+              Copy-Item ".\requirements.txt" "$deployPath\requirements.txt" -Force
+          }
+
+          Write-Host "Deployment completed successfully."
+          Write-Host "Deployment location: $deployPath"
